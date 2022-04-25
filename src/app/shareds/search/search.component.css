@@ -1,0 +1,11 @@
+.placeholder::placeholder{
+    color: whitesmoke;
+}
+
+.search {
+    cursor: wait !important;
+}
+
+.input_search{
+    text-transform: uppercase;
+}

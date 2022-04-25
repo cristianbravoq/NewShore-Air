@@ -1,0 +1,293 @@
+<body class="static-layout">
+	<div class="boxed-page">
+        <nav id="gtco-header-navbar" class="navbar navbar-expand-lg grid-item-wrapper">
+            <div class="container-fluid">
+                <a class="navbar-brand d-flex align-items-center" style="z-index: 4;" href="/">
+                    <span class="lnr">NewShore Air</span>
+                </a>
+                <button  style="z-index: 4;" class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="lnr lnr-menu">X</span>
+                </button>
+                <div class="collapse navbar-collapse flex-row-reverse" id="navbarNavAltMarkup" style="z-index: 4;">
+                    <ul class="navbar-nav ml-auto">
+                        <ng-container *ngIf="userLogged | async ; else navTemplate">
+                            <li class="d-grid text-center">
+                                <button class="align-self-center btn"><a style="text-decoration:none; color: #263238;" (click)="onLogout()" [routerLink]="['/home']">Cerrar Sesion</a></button>
+                            </li>
+                        </ng-container>
+                        <ng-template  #navTemplate>
+                            <li class="d-grid text-center">
+                                <span class="align-self-center" style="color: #263238;" [routerLink]="['/home']">Discounts</span>
+                            </li>
+                            <li class="nav-item">
+                                <div class="d-grid mt-1 text-center">
+                                    <div class="container">
+                                      <button class="btn btn-danger btn-block" (click)="IngresarConGoogle()">
+                                        <div class="flex-c">
+                                          <a href="#" class="login100-social-item">
+                                            <img src="https://colorlib.com/etc/lf/Login_v9/images/icons/icon-google.png" alt="GOOGLE">
+                                          </a>
+                                        </div>
+                                      </button>
+                                    </div>
+                                </div>
+                            </li>
+                        </ng-template>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <hr>
+        <div class="jumbotron d-flex align-items-center grid-item-wrapper" style="background-image: url(../../../assets/img/hero-2.jpg)">
+            <div class="container text-center">
+                <h1 class="display-2 mb-4">Hello,</h1>
+                <p>
+                    The destination of our journey is never a place, but a new way of seeing things.
+                </p>
+
+            </div>
+        </div>
+
+
+        <section id="gtco-counter" class="">
+
+            <div class="container">
+                <div class="section-content">
+
+                    <div class="container align-self-center">
+                        <form class="example-form">
+                            <div class="row align-items-start">
+                                <div class="col">
+                                    <app-search (origin)="handleSearch($event)" (destination)="handleSearch2($event)"></app-search>
+                                </div>
+                                <div class="col align-self-center">
+                                    <button (click)="buscarRuta()" type="button" class="btn btn-success">Send</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="text-center">
+                        <ng-container *ngIf="this.vacio === false ; else travelTemplate">
+                            <div class="row text-center">
+                                <p>Enter the city of origin and the city of destination to calculate the route, then press send.</p>
+                            </div>
+                            <div class="alert alert-warning" role="alert">
+                                You have not yet performed a search
+                            </div>
+                        </ng-container>
+                        <ng-template #travelTemplate>
+                            <div class="alert alert-success" role="alert">
+                                <ng-container *ngIf="this.auxEscala.length === 0 ; else TemplateVacio">
+                                        <p>Unable to calculate the route</p>
+                                </ng-container>
+                                <ng-template #TemplateVacio>
+                                    <table class="table table-hover">
+                                        <thead>
+                                          <tr>
+                                            <th scope="col">Origin</th>
+                                            <th scope="col">Destination</th>
+                                            <th scope="col">Price</th>
+                                          </tr>
+                                        </thead>
+                                        <tbody *ngFor="let item of this.auxEscala">
+                                          <tr>
+                                            <th scope="row">{{item.departureStation}}</th>
+                                            <td>{{item.arrivalStation}}</td>
+                                            <td>USD {{item.price}}</td>
+                                          </tr>
+                                        </tbody>
+                                        <tbody>
+                                            <tr>
+                                              <!-- <th scope="row"></th> -->
+                                              <td colspan="2">PRICE: 
+                                                <button (click)="totalCoin()" type="button" class="btn btn-success">USD</button>
+                                                  <button (click)="coinEUR()" type="button" class="btn btn-success">EUR</button>
+                                                  <button (click)="coinGBP()" type="button" class="btn btn-success">GBP</button>
+                                                </td>
+                                              <td>{{this.coin}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </ng-template>
+                            </div>
+                        </ng-template>
+                    </div>
+
+                </div>
+            </div>
+
+        </section>
+<!-- End of Counter Section -->
+
+<!-- Portfolio Section -->
+        <section id="gtco-portfolio" class="bg-white">
+            <div class="container">
+                <div class="section-content">
+                    <!-- Section Title -->
+                    <div class="title-wrap">
+                        <h2 class="section-title">Use Your Deals</h2>
+                        <p class="section-sub-title">Receives the necessary travel information regarding COVID-19</p>
+                    </div>
+                    <!-- End of Section Title -->
+                    <div class="row">
+                        <!-- Portfolio Holder -->
+                        <div class="col-md-12 portfolio-holder">
+                            <!-- Portfolio Content -->
+                            <div class="grid-portfolio" style="position: relative; height: 566.75px;">
+                                <div class="grid-sizer"></div>
+                                <div class="gutter-sizer"></div>
+                                <!-- Portfolio Item -->
+                                <div class="grid-item minimalism" style="position: absolute; left: 0%; top: 0px;">
+                                    <div class="grid-item-wrapper">
+                                        <img src="../../../assets/img/photo-1.jpg" alt="portfolio-img" class="portfolio-item">
+                                        <div class="grid-info">
+                                            <div class="grid-link d-flex justify-content-center">
+                                                <a class="img-pop" data-rel="lightcase" href="../../../assets/img/photo-1.jpg" title="Photo-1">
+                                                    <span class="lnr lnr-move"></span>
+                                                </a>
+                                                <a class="ext-link" href="https://unsplash.com/" target="_blank">
+                                                    <span class="lnr lnr-link"></span>
+                                                </a>
+                                            </div>
+                                            <div class="grid-title">
+                                                <h4>Camera</h4>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <!-- End of Portfolio Item -->
+                                <!-- Portfolio Item -->
+                                <div class="grid-item vintage" style="position: absolute; left: 34%; top: 0px;">
+                                    <div class="grid-item-wrapper">
+                                        <img src="../../../assets/img/photo-6.jpg" alt="portfolio-img" class="portfolio-item">
+                                        <div class="grid-info">
+                                            <div class="grid-link d-flex justify-content-center">
+                                                <a class="img-pop" data-rel="lightcase" href="../../../assets/img/photo-6.jpg" title="Ship">
+                                                    <span class="lnr lnr-move"></span>
+                                                </a>
+                                                <a class="ext-link" href="https://unsplash.com/" target="_blank">
+                                                    <span class="lnr lnr-link"></span>
+                                                </a>
+                                            </div>
+                                            <div class="grid-title">
+                                                <h4>Flower</h4>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <!-- End of Portfolio Item -->
+                                <!-- Portfolio Item -->
+                                <div class="grid-item creative grid-item-height" style="position: absolute; left: 68%; top: 0px;">
+                                    <div class="grid-item-wrapper">
+                                        <img src="../../../assets/img/photo-2.jpg" alt="portfolio-img" class="portfolio-item">
+                                        <div class="grid-info">
+                                            <div class="grid-link d-flex justify-content-center">
+                                                <a class="img-pop" data-rel="lightcase" href="../../../assets/img/photo-2.jpg" title="Tracy Portrait">
+                                                    <span class="lnr lnr-move"></span>
+                                                </a>
+                                                <a class="ext-link" href="https://unsplash.com/" target="_blank">
+                                                    <span class="lnr lnr-link"></span>
+                                                </a>
+                                            </div>
+                                            <div class="grid-title">
+                                                <h4>Breakfast</h4>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <!-- End of Portfolio Item -->
+                                <!-- Portfolio Item -->
+                                <div class="grid-item creative" style="position: absolute; left: 34%; top: 240.8px;">
+                                    <div class="grid-item-wrapper">
+                                        <img src="../../../assets/img/photo-7.jpg" alt="portfolio-img" class="portfolio-item">
+                                        <div class="grid-info">
+                                            <div class="grid-link d-flex justify-content-center">
+                                                <a class="img-pop" data-rel="lightcase" href="../../../assets/img/photo-7.jpg" title="Guitar">
+                                                    <span class="lnr lnr-move"></span>
+                                                </a>
+                                                <a class="ext-link" href="https://unsplash.com/" target="_blank">
+                                                    <span class="lnr lnr-link"></span>
+                                                </a>
+                                            </div>
+                                            <div class="grid-title">
+                                                <h4>Chair</h4>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <!-- Portfolio Item -->
+                                <div class="grid-item vintage" style="position: absolute; left: 0%; top: 351.2px;">
+                                    <div class="grid-item-wrapper">
+                                        <img src="../../../assets/img/photo-4.jpg" alt="portfolio-img" class="portfolio-item">
+                                        <div class="grid-info">
+                                            <div class="grid-link d-flex justify-content-center">
+                                                <a class="img-pop" data-rel="lightcase" href="../../../assets/img/photo-4.jpg" title="Bookself">
+                                                    <span class="lnr lnr-move"></span>
+                                                </a>
+                                                <a class="ext-link" href="https://unsplash.com/" target="_blank">
+                                                    <span class="lnr lnr-link"></span>
+                                                </a>
+                                            </div>
+                                            <div class="grid-title">
+                                                <h4>Hidden Book</h4>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <!-- End of Portfolio Item -->
+                                <!-- Portfolio Item -->
+                                <div class="grid-item creative" style="position: absolute; left: 68%; top: 351.2px;">
+                                    <div class="grid-item-wrapper">
+                                        <img src="../../../assets/img/photo-9.jpg" alt="portfolio-img" class="portfolio-item">
+                                        <div class="grid-info">
+                                            <div class="grid-link d-flex justify-content-center">
+                                                <a class="img-pop" data-rel="lightcase" href="../../../assets/img/photo-9.jpg" title="Guitar">
+                                                    <span class="lnr lnr-move"></span>
+                                                </a>
+                                                <a class="ext-link" href="https://unsplash.com/" target="_blank">
+                                                    <span class="lnr lnr-link"></span>
+                                                </a>
+                                            </div>
+                                            <div class="grid-title">
+                                                <h4>Red</h4>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <!-- End of Portfolio Item -->
+                            </div>
+                            <!-- End of Portfolio Content -->
+                        </div>
+                        <!-- End of Portfolio Holder -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="footer-basic">
+            <footer>
+                <div class="social">
+                    <a href="#"><img src="../../../assets/img/instagram-square-brands.svg"></a>
+                    <a href="#"><img src="../../../assets/img/linkedin-brands.svg"></a>
+                    <a href="#"><img src="../../../assets/img/facebook-square-brands.svg"></a>
+                    <a href="#"><img src="../../../assets/img/twitter-square-brands.svg"></a>
+                </div>
+                <ul class="list-inline">
+                    <li class="list-inline-item"><a href="#">Home</a></li>
+                    <li class="list-inline-item"><a href="#">Services</a></li>
+                    <li class="list-inline-item"><a href="#">About</a></li>
+                    <li class="list-inline-item"><a href="#">Terms</a></li>
+                    <li class="list-inline-item"><a href="#">Privacy Policy</a></li>
+                </ul>
+                <p class="copyright">NewShore-Air</p>
+            </footer>
+        </div>
+        
+    </div>
+</body>
